@@ -37,7 +37,7 @@ public class TagController {
     public String processCreateTagForm(@ModelAttribute @Valid Tag tag, Errors errors, Model model) {
         if (errors.hasErrors()) {
             model.addAttribute("title", "Create Tag");
-            model.addAttribute(tag);
+            model.addAttribute("tag" ,tag);
             return "tags/create";
         }
         tagRepository.save(tag);
