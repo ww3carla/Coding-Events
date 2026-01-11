@@ -1,11 +1,37 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org/">
-<head th:replace="fragments :: head(${title})"></head>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head th:replace="~{fragments :: head}"></head>
+
 <body class="container">
+
+<div th:replace="~{fragments :: header}"></div>
+
+<h1 class="mt-4">Coding Events</h1>
+
+<div sec:authorize="isAuthenticated()">
+    <p>Username: <span th:text="${user.username}"></span></p>
+    <p>Name: <span th:text="${user.firstName} + ' ' + ${user.lastName}"></span></p>
+    <p>E-mail address: <span th:text="${user.emailAddress}"></span></p>
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Authority</th>
+        </tr>
+        <tr th:each="role : ${user.roles}">
+            <td th:text="${role.role}"></td>
+        </tr>
+    </table>
+</div>
+
+<div sec:authorize="!isAuthenticated()" class="mt-3">
+    <p>Please login or register to manage events.</p>
+</div>
 
 <h1>Coding Events</h1>
 
-<header th:replace="fragments :: header"></header>
+<div th:replace="~{fragments :: footer}"></div>
 
 </body>
 </html>
