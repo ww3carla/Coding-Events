@@ -3,10 +3,13 @@
 <head th:replace="~{fragments :: head}"></head>
 <body class="container">
 
+<div th:replace="~{fragments :: head}"></div>
+
 <h1 th:text="${title}">Delete Event</h1>
-<header th:replace="fragments :: header"></header>
 
 <form method="post" action="/events/delete">
+
+  <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 
   <th:block th:each="event : ${events}">
     <div class="form-group">
